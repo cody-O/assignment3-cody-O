@@ -1,10 +1,28 @@
 <template>
   <div class="froth">
-    <div v-for=" in 5" class="foam"></div>
+    <div v-for=" in 5" class="foam"
+    :style="{
+      backgroundColor: props.creamer.color,
+      opacity: opacity
+    }"></div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from "vue";
+import type { CreamerType } from "../stores/beverage";
+
+const props = defineProps<{
+  creamer: CreamerType;
+}>();
+
+const opacity = computed(() => {
+  if (props.creamer.name === "Milk") return 0.2;
+  if (props.creamer.name === "Cream") return 0.35;
+  if (props.creamer.name === "Half & Half") return 0.5;
+  return 0;
+});
+</script>
 <style lang="scss" scoped>
 .froth {
   overflow: visible;

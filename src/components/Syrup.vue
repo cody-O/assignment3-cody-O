@@ -1,8 +1,19 @@
 <template>
-  <div class="syrup"></div>
+  <div class="syrup"
+  :style="{
+      backgroundColor: props.syrup.color,
+      opacity: props.syrup.name === 'No Syrup' ? 0 : 0.25
+    }"></div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { SyrupType } from "../stores/beverage";
+
+const props = defineProps<{
+  syrup: SyrupType;
+}>();
+</script>
+
 <style lang="scss" scoped>
 .syrup {
   transform: translateY(400%);
